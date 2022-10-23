@@ -16,9 +16,14 @@ before_script:
 script:
   - docker --version # print the version for logging
   - docker build -t simple-express .
-  - docker tag simple-express YOUR_DOCKER_HUB/simple-express:latest
+  - docker tag simple-express tiochan/simple-express:latest
 
 after_success:
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-  - docker push YOUR_DOCKER_HUB/simple-express
+  - docker push tiochan/simple-express
+
+env:
+  global:
+    - DOCKER_HUB_USERNAME=tiochan
+    - secure: ecSohl/VyK/Mh+iPEI8bz7/3tfTI+327c7HwtW4DejwdNgn4l0iHCezQS7rRZyIUuCoTREXw2JKBe8XWU6zXAaHk3R2sx7EVTeE8v3eYninC6qD63nfFYSTBOJm5DsTgNKzx/tNJsyoYdXBTJnonAOokzYIWagDCRQ5HE0hs2fJT2w4pmOU7lt0zpesXxw1MBrEOSHWTRnfFzTT5a1aWZLsTzRY/8VDSb2Bd2D/2v4bqI/FDvuMF8YWu7HHVHiSVTGKirOvsMnwEqbo2/R6x1kODanMp2I7QaNCixoLLraixuR/rRgzw6JP2RFVJFMDMAAy9ORf2WHXiDjl3GNraU7R4RA/w7O+BguyPv+6zTNMp2RuoHSs6UhjgkzIbofg8vKUW3AisFZIAz04IuLEufCOlssJRHhyaQ9z8VVxVcsQpd+5Cbe32BNmiDmPq+LIcRBGLu/UVUAJTbNESdMSmPlG8//DbMHF+cS86JcvUTov4XDPRl67NjOR2jeMEvWQEyZRcVlAGCOD70BHMO381hiWuLjjRyEVhLNKguFghpasEy3xB3X1oUVt6FPp9sL/0DASCnL17wzToQ5gAhyLdvEPqbMGObDbxT+fSXqXV26nbC2/5i2QGnOZENkeTvtrdS9Ckf92ae9B9knZS2rhIJS0SmqtIfUF7/g+PVhB7I1w=
 
